@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Braveheart Fellowship backs brave young researchers willing to go against the world in pursuit of truth.">
+    <title>Braveheart Fellowship</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <canvas class="cursor-grid" aria-hidden="true"></canvas>
+    <main class="hero" aria-label="Braveheart Fellowship">
+      <section class="intro">
+        <h1>Braveheart Fellowship</h1>
+        <p>
+          Fortune favours the bold. <br>
+          We back brave young researchers willing to
+          go against the world in the pursuit of truth.
+        </p>
+        <nav class="links" aria-label="Primary links">
+          <a href="#fellowship" data-open-apply data-apply-type="fellowship">
+            <span>fellowship</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#grant" data-open-apply data-apply-type="grant">
+            <span>grant</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="mailto:aryan@braveheartfellowship.org" data-contact-link>
+            <span class="contact-text">contact</span>
+            <span class="contact-arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </section>
+    </main>
+
+    <aside class="apply-panel" id="apply-panel" aria-hidden="true" aria-labelledby="apply-title">
+      <button class="panel-close" type="button" aria-label="Close application" data-close-apply>→</button>
+      <div class="panel-heading">
+        <span>application</span>
+        <h2 id="apply-title">Fellowship</h2>
+      </div>
+      <form class="apply-form" action="" method="post">
+        <input type="hidden" name="application_type" value="fellowship">
+        <label>
+          <input type="text" name="name" autocomplete="name" placeholder="Name" aria-label="Name" required>
+        </label>
+        <label>
+          <input type="email" name="email" autocomplete="email" placeholder="Email" aria-label="Email" required>
+        </label>
+        <label>
+          <input type="text" name="referral_code" autocomplete="off" placeholder="Referral code" aria-label="Referral code">
+        </label>
+        <label>
+          <input type="text" name="research_area" placeholder="Research area" aria-label="Research area" required>
+        </label>
+        <button type="submit">submit application</button>
+        <p class="form-note">
+          Submission endpoint pending. Add a form service URL or Hostinger backend handler before launch.
+        </p>
+      </form>
+    </aside>
+
+    <audio id="waves-audio" src="assets/waves.mp3" preload="auto" autoplay loop></audio>
+    <button class="audio-toggle is-playing" type="button" aria-pressed="true" aria-label="Pause ocean waves">
+      <span class="audio-icon" aria-hidden="true"></span>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>

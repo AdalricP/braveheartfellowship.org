@@ -1,0 +1,353 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap");
+
+:root {
+  --ink: #fff8eb;
+  --muted: rgba(255, 248, 235, 0.78);
+  --edge: rgba(255, 248, 235, 0.34);
+  --cursor-x: 50vw;
+  --cursor-y: 50vh;
+  --grid-opacity: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: #090907;
+  color: var(--ink);
+  font-family: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+}
+
+h1,
+p,
+.links,
+.audio-toggle,
+.panel-heading,
+.panel-close {
+  user-select: none;
+}
+
+body::before {
+  background:
+    linear-gradient(90deg, rgba(7, 7, 5, 0.78) 0%, rgba(7, 7, 5, 0.38) 40%, rgba(7, 7, 5, 0.12) 100%),
+    linear-gradient(180deg, rgba(7, 7, 5, 0.08), rgba(7, 7, 5, 0.56)),
+    url("assets/background.png") center / cover no-repeat;
+  content: "";
+  inset: 0;
+  position: fixed;
+  z-index: -2;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 31vw 28vh, rgba(214, 153, 71, 0.16), rgba(214, 153, 71, 0.06) 16vw, transparent 36vw),
+    radial-gradient(circle at 78vw 62vh, rgba(255, 248, 235, 0.065), rgba(255, 248, 235, 0.025) 12vw, transparent 32vw);
+  filter: blur(34px);
+  content: "";
+  inset: -8vmax;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
+.cursor-grid {
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.hero {
+  align-items: flex-start;
+  display: flex;
+  min-height: 100vh;
+  padding: clamp(28px, 5vw, 76px);
+  position: relative;
+  z-index: 1;
+}
+
+.intro {
+  max-width: 620px;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 6.1rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  margin: 0 0 clamp(18px, 3vw, 28px);
+}
+
+p {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.55vw, 1.28rem);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 520px;
+}
+
+.links {
+  display: flex;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.links a,
+.audio-toggle {
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.links a {
+  align-items: center;
+  background-image: linear-gradient(to top, var(--ink) 0 50%, transparent 50% 100%);
+  background-position: top;
+  background-size: 100% 200%;
+  display: inline-flex;
+  gap: 6px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  transition: background-position 240ms cubic-bezier(0.22, 1, 0.36, 1), color 220ms ease;
+}
+
+.contact-text {
+  display: inline-block;
+  transition: opacity 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+}
+.contact-arrow {
+  display: inline-block;
+  transition: opacity 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+}
+
+.contact-text.is-changing {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.contact-arrow.is-changing {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.links a:hover {
+  background-position: bottom;
+  color: #090907;
+  text-decoration: none;
+}
+
+.audio-toggle {
+  align-items: center;
+  background: rgba(7, 7, 5, 0.18);
+  border: 1px solid var(--edge);
+  border-radius: 50%;
+  bottom: clamp(18px, 3vw, 34px);
+  cursor: pointer;
+  display: grid;
+  height: 42px;
+  justify-content: center;
+  padding: 10px 13px;
+  position: fixed;
+  right: clamp(18px, 3vw, 34px);
+  width: 42px;
+  z-index: 2;
+}
+
+.audio-toggle:hover {
+  background: rgba(255, 248, 235, 0.12);
+}
+
+.audio-icon {
+  border-bottom: 8px solid transparent;
+  border-left: 13px solid var(--ink);
+  border-top: 8px solid transparent;
+  display: block;
+  height: 0;
+  margin-left: 3px;
+  width: 0;
+}
+
+.audio-toggle.is-playing .audio-icon {
+  border: 0;
+  height: 16px;
+  margin-left: 0;
+  position: relative;
+  width: 14px;
+}
+
+.audio-toggle.is-playing .audio-icon::before,
+.audio-toggle.is-playing .audio-icon::after {
+  background: var(--ink);
+  content: "";
+  height: 16px;
+  position: absolute;
+  top: 0;
+  width: 4px;
+}
+
+.audio-toggle.is-playing .audio-icon::before {
+  left: 1px;
+}
+
+.audio-toggle.is-playing .audio-icon::after {
+  right: 1px;
+}
+
+.apply-panel {
+  background: rgba(9, 9, 7, 0.72);
+  border: 1px solid var(--edge);
+  border-radius: 18px;
+  bottom: clamp(86px, 10vh, 124px);
+  color: var(--ink);
+  max-width: 520px;
+  overflow-y: auto;
+  padding: clamp(20px, 3vw, 36px);
+  position: fixed;
+  right: clamp(18px, 3vw, 34px);
+  top: clamp(18px, 3vw, 34px);
+  transform: translateX(calc(100% + clamp(18px, 3vw, 34px) + 24px));
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: min(calc(100% - 36px), 460px);
+  z-index: 4;
+}
+
+.apply-panel.is-open {
+  transform: translateX(0);
+}
+
+.panel-close {
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  height: auto;
+  line-height: 1;
+  padding: 0;
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: auto;
+}
+
+.panel-close:hover {
+  opacity: 0.68;
+}
+
+.panel-heading {
+  margin: 26px 0 22px;
+}
+
+.panel-heading span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.apply-form {
+  display: grid;
+  gap: 13px;
+}
+
+.form-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.apply-form label {
+  display: block;
+}
+
+.apply-form input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 248, 235, 0.34);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+  padding: 8px 0 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.apply-form input::placeholder {
+  color: rgba(255, 248, 235, 0.72);
+  opacity: 1;
+}
+
+.apply-form input:focus {
+  border-bottom-color: var(--ink);
+  box-shadow: 0 8px 18px -16px var(--ink);
+}
+
+.apply-form button {
+  background:
+    linear-gradient(to top, #090907 0 50%, var(--ink) 50% 100%);
+  background-position: top;
+  background-size: 100% 200%;
+  border: 1px solid var(--ink);
+  color: #090907;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+  margin-top: 6px;
+  padding: 12px 14px;
+  transition: background-position 240ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms ease;
+}
+
+.apply-form button:hover {
+  background-position: bottom;
+  color: var(--ink);
+}
+
+.form-note {
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  body::before {
+    background:
+      linear-gradient(180deg, rgba(7, 7, 5, 0.72), rgba(7, 7, 5, 0.36) 58%, rgba(7, 7, 5, 0.72)),
+      url("assets/background.png") center / cover no-repeat;
+  }
+
+  .hero {
+    padding: 28px;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .apply-panel {
+    bottom: 72px;
+    right: 14px;
+    top: 14px;
+    width: calc(100% - 28px);
+  }
+}
