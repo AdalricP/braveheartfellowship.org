@@ -40,7 +40,7 @@
         <span>application</span>
         <h2 id="apply-title">Fellowship</h2>
       </div>
-      <form class="apply-form" action="" method="post">
+      <form class="apply-form" action="submit.php" method="post" novalidate>
         <input type="hidden" name="application_type" value="fellowship">
         <label>
           <input type="text" name="name" autocomplete="name" placeholder="Name" aria-label="Name" required>
@@ -55,9 +55,7 @@
           <input type="text" name="research_area" placeholder="Research area" aria-label="Research area" required>
         </label>
         <button type="submit">submit application</button>
-        <p class="form-note">
-          Submission endpoint pending. Add a form service URL or Hostinger backend handler before launch.
-        </p>
+        <p class="form-status" role="status" aria-live="polite"></p>
       </form>
     </aside>
 

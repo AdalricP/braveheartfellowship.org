@@ -3,6 +3,8 @@ const toggle = document.querySelector(".audio-toggle");
 const applyPanel = document.querySelector("#apply-panel");
 const applyTitle = document.querySelector("#apply-title");
 const applyTypeInput = document.querySelector("input[name='application_type']");
+const applyForm = document.querySelector(".apply-form");
+const formStatus = document.querySelector(".form-status");
 const openApplyControls = document.querySelectorAll("[data-open-apply]");
 const closeApplyControls = document.querySelectorAll("[data-close-apply]");
 const contactLink = document.querySelector("[data-contact-link]");
@@ -71,9 +73,20 @@ async function startAudioByDefault() {
 
 startAudioByDefault();
 
-function resumeAudioOnFirstInteraction() {
+function disableFirstInteractionResume() {
+  window.removeEventListener("pointerdown", resumeAudioOnFirstInteraction);
+  window.removeEventListener("keydown", resumeAudioOnFirstInteraction);
+}
+
+async function resumeAudioOnFirstInteraction(event) {
+  if (event?.target?.closest?.(".audio-toggle")) return;
   if (!audio?.paused) return;
-  startAudioByDefault();
+
+  await startAudioByDefault();
+
+  if (!audio.paused) {
+    disableFirstInteractionResume();
+  }
 }
 
 window.addEventListener("pointerdown", resumeAudioOnFirstInteraction, { passive: true });
@@ -127,6 +140,52 @@ openApplyControls.forEach((control) => {
 
 closeApplyControls.forEach((control) => {
   control.addEventListener("click", closeApplyPanel);
+});
+
+function setFormStatus(message, type = "") {
+  if (!formStatus) return;
+
+  formStatus.textContent = message;
+  formStatus.classList.remove("is-error", "is-success");
+
+  if (type) {
+    formStatus.classList.add(type);
+  }
+}
+
+applyForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const submitButton = applyForm.querySelector("button[type='submit']");
+  const formData = new FormData(applyForm);
+
+  if (!applyForm.reportValidity()) return;
+
+  setFormStatus("Submitting...", "");
+  submitButton?.setAttribute("disabled", "disabled");
+
+  try {
+    const response = await fetch(applyForm.action, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Submission failed.");
+    }
+
+    applyForm.reset();
+    if (applyTypeInput) {
+      applyTypeInput.value = result.application_type || applyTypeInput.value;
+    }
+    setFormStatus("Application received.", "is-success");
+  } catch (error) {
+    setFormStatus(error.message || "Something went wrong. Please try again.", "is-error");
+  } finally {
+    submitButton?.removeAttribute("disabled");
+  }
 });
 
 contactLink?.addEventListener("click", (event) => {
@@ -270,10 +329,12 @@ function releaseGridWarp() {
 
 function shrinkGridReveal() {
   grid.targetRevealScale = 0;
+  grid.targetOpacity = 0;
 }
 
 function expandGridReveal() {
   grid.targetRevealScale = 1;
+  grid.targetOpacity = 0.72;
 }
 
 window.addEventListener("resize", resizeGrid);
