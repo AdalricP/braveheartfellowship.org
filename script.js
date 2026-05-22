@@ -14,6 +14,7 @@ const gridInteractiveControls = document.querySelectorAll(".links a, .audio-togg
 const canvas = document.querySelector(".cursor-grid");
 const ctx = canvas?.getContext("2d");
 const panelTransitionMs = 360;
+const applicationEndpointUrl = "https://script.google.com/macros/s/AKfycbwN3sEI4gc95pknGv5iVnjcMAeau2UdZO9pIm46PU3noD-1bEzZWoBKwtfDC891lWVw1Q/exec";
 let panelSwitchTimer;
 
 const grid = {
@@ -153,26 +154,57 @@ function setFormStatus(message, type = "") {
   }
 }
 
+function setInvalidReferralStatus() {
+  if (!formStatus) return;
+
+  formStatus.classList.remove("is-success");
+  formStatus.classList.add("is-error");
+  formStatus.innerHTML = 'Referral code is not valid. <a href="referrals.html">Learn how to get one.</a>';
+}
+
 applyForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const submitButton = applyForm.querySelector("button[type='submit']");
-  const formData = new FormData(applyForm);
 
   if (!applyForm.reportValidity()) return;
+  if (!applicationEndpointUrl) {
+    setFormStatus("Set the application endpoint URL in script.js first.", "is-error");
+    return;
+  }
 
-  setFormStatus("Submitting...", "");
+  const formData = new FormData(applyForm);
+  const payload = {
+    source: "braveheart_application",
+    application_type: formData.get("application_type") || "",
+    name: formData.get("name") || "",
+    email: formData.get("email") || "",
+    referral_code: formData.get("referral_code") || "",
+    work_description: formData.get("work_description") || "",
+    links: formData.get("links") || "",
+    proudest_work: formData.get("proudest_work") || ""
+  };
+
+  setFormStatus("Checking referral code...", "");
   submitButton?.setAttribute("disabled", "disabled");
 
   try {
-    const response = await fetch(applyForm.action, {
+    const response = await fetch(applicationEndpointUrl, {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
     });
 
     const result = await response.json();
 
     if (!response.ok || !result.ok) {
+      if (result.code === "INVALID_REFERRAL") {
+        setInvalidReferralStatus();
+        return;
+      }
+
       throw new Error(result.message || "Submission failed.");
     }
 
@@ -180,7 +212,7 @@ applyForm?.addEventListener("submit", async (event) => {
     if (applyTypeInput) {
       applyTypeInput.value = result.application_type || applyTypeInput.value;
     }
-    setFormStatus("Application received.", "is-success");
+    setFormStatus("Application received. Check your email for the call link.", "is-success");
   } catch (error) {
     setFormStatus(error.message || "Something went wrong. Please try again.", "is-error");
   } finally {

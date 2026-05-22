@@ -40,7 +40,7 @@
         <span>application</span>
         <h2 id="apply-title">Fellowship</h2>
       </div>
-      <form class="apply-form" action="submit.php" method="post" novalidate>
+      <form class="apply-form" action="" method="post" novalidate>
         <input type="hidden" name="application_type" value="fellowship">
         <label>
           <input type="text" name="name" autocomplete="name" placeholder="Name" aria-label="Name" required>
@@ -49,13 +49,21 @@
           <input type="email" name="email" autocomplete="email" placeholder="Email" aria-label="Email" required>
         </label>
         <label>
-          <input type="text" name="referral_code" autocomplete="off" placeholder="Referral code" aria-label="Referral code">
+          <input type="text" name="referral_code" autocomplete="off" placeholder="Referral code" aria-label="Referral code" required>
         </label>
         <label>
-          <input type="text" name="research_area" placeholder="Research area" aria-label="Research area" required>
+          <textarea name="work_description" rows="3" placeholder="What are you working on?" aria-label="What are you working on?" required></textarea>
+        </label>
+        <label>
+          <textarea name="links" rows="2" placeholder="X / LinkedIn / Scholar / GitHub links (optional)" aria-label="X, LinkedIn, Google Scholar, GitHub, or other links"></textarea>
+        </label>
+        <label>
+          <textarea name="proudest_work" rows="3" placeholder="Thing you have built or researched that you are proudest of" aria-label="Thing you have built or researched that you are proudest of" required></textarea>
         </label>
         <button type="submit">submit application</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-status" role="status" aria-live="polite">
+          Application endpoint not configured yet.
+        </p>
       </form>
     </aside>
 

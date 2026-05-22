@@ -281,7 +281,8 @@ h2 {
   display: block;
 }
 
-.apply-form input {
+.apply-form input,
+.apply-form textarea {
   background: transparent;
   border: 0;
   border-bottom: 1px solid rgba(255, 248, 235, 0.34);
@@ -293,12 +294,18 @@ h2 {
   width: 100%;
 }
 
-.apply-form input::placeholder {
+.apply-form textarea {
+  resize: vertical;
+}
+
+.apply-form input::placeholder,
+.apply-form textarea::placeholder {
   color: rgba(255, 248, 235, 0.72);
   opacity: 1;
 }
 
-.apply-form input:focus {
+.apply-form input:focus,
+.apply-form textarea:focus {
   border-bottom-color: var(--ink);
   box-shadow: 0 8px 18px -16px var(--ink);
 }
@@ -336,6 +343,12 @@ h2 {
 
 .form-status.is-success {
   color: #d8e7c2;
+}
+
+.form-status a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media (max-width: 680px) {
