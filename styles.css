@@ -30,7 +30,8 @@ p,
 .links,
 .audio-toggle,
 .panel-heading,
-.panel-close {
+.panel-close,
+.description-block {
   user-select: none;
 }
 
@@ -75,6 +76,90 @@ body::after {
 
 .intro {
   max-width: 620px;
+}
+
+.description-block {
+  bottom: clamp(28px, 5vw, 52px);
+  left: clamp(28px, 5vw, 76px);
+  max-width: min(40vw, 560px);
+  position: absolute;
+}
+
+.description-block summary {
+  border-bottom: 1px solid rgba(255, 248, 235, 0.34);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+  list-style: none;
+  padding-bottom: 10px;
+}
+
+.description-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.description-block summary::after {
+  content: "→";
+  float: right;
+  transition: transform 180ms ease;
+}
+
+.description-block[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.description-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+}
+
+.description-block.is-open .description-content {
+  opacity: 1;
+}
+
+.description-block ul {
+  color: var(--muted);
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+  position: relative;
+}
+
+.description-block ul::before {
+  background: rgba(255, 248, 235, 0.24);
+  bottom: -10px;
+  content: "";
+  left: 4px;
+  position: absolute;
+  top: -10px;
+  width: 1px;
+}
+
+.description-block li {
+  font-size: clamp(0.86rem, 1vw, 0.98rem);
+  line-height: 1.45;
+  padding-left: 12px;
+  position: relative;
+}
+
+.description-block li::before {
+  background: var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(9, 9, 7, 0.72);
+  content: "";
+  height: 7px;
+  left: -21px;
+  position: absolute;
+  top: 0.56em;
+  transform: translateY(-50%);
+  width: 7px;
 }
 
 h1 {
@@ -372,5 +457,18 @@ h2 {
     right: 14px;
     top: 14px;
     width: calc(100% - 28px);
+  }
+
+  .description-block {
+    bottom: 28px;
+    left: 28px;
+    max-width: calc(100% - 56px);
+    position: static;
+  }
+
+  .hero {
+    flex-direction: column;
+    gap: 36px;
+    justify-content: space-between;
   }
 }

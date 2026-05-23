@@ -63,6 +63,12 @@ function doPost(e) {
   }
 }
 
+function setupBraveheartBackend() {
+  const spreadsheet = getSpreadsheet();
+  ensureBaseSheets(spreadsheet);
+  MailApp.getRemainingDailyQuota();
+}
+
 function parsePayload(e) {
   if (!e || !e.postData || !e.postData.contents) return {};
   return JSON.parse(e.postData.contents);
@@ -119,7 +125,7 @@ function handleApplication(payload) {
     submittedAt
   ]);
 
-  sendCalEmail({
+  const emailResult = sendCalEmail({
     applicationType,
     name,
     email
@@ -128,6 +134,8 @@ function handleApplication(payload) {
   return jsonResponse({
     ok: true,
     application_type: applicationType,
+    email_sent: emailResult.ok,
+    email_error: emailResult.message,
     message: "Application received."
   });
 }
@@ -240,12 +248,24 @@ function sendCalEmail(applicant) {
     </div>
   `;
 
-  MailApp.sendEmail({
-    to: applicant.email,
-    subject: "Next step: book your Braveheart call",
-    htmlBody,
-    body: `Hi ${applicant.name},\n\nYour referral code was accepted. Book your Braveheart ${label} call here:\n${CAL_LINK}\n\nFortune favours the bold.\nBraveheart Fellowship`
-  });
+  try {
+    MailApp.sendEmail({
+      to: applicant.email,
+      subject: "Next step: book your Braveheart call",
+      htmlBody,
+      body: `Hi ${applicant.name},\n\nYour referral code was accepted. Book your Braveheart ${label} call here:\n${CAL_LINK}\n\nFortune favours the bold.\nBraveheart Fellowship`
+    });
+
+    return {
+      ok: true,
+      message: ""
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      message: error && error.message ? error.message : "Email could not be sent."
+    };
+  }
 }
 
 function isCalBookingPayload(payload) {

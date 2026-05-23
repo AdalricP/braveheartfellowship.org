@@ -10,6 +10,9 @@ const closeApplyControls = document.querySelectorAll("[data-close-apply]");
 const contactLink = document.querySelector("[data-contact-link]");
 const contactText = document.querySelector(".contact-text");
 const contactArrow = contactLink.querySelector(".contact-arrow");
+const descriptionBlock = document.querySelector(".description-block");
+const descriptionSummary = descriptionBlock?.querySelector("summary");
+const descriptionContent = descriptionBlock?.querySelector(".description-content");
 const gridInteractiveControls = document.querySelectorAll(".links a, .audio-toggle, .apply-form button");
 const canvas = document.querySelector(".cursor-grid");
 const ctx = canvas?.getContext("2d");
@@ -73,6 +76,38 @@ async function startAudioByDefault() {
 }
 
 startAudioByDefault();
+
+function toggleDescriptionBlock() {
+  if (!descriptionBlock || !descriptionContent || !descriptionSummary) return;
+
+  const isOpen = descriptionBlock.hasAttribute("open");
+
+  if (isOpen) {
+    descriptionContent.style.maxHeight = `${descriptionContent.scrollHeight}px`;
+    requestAnimationFrame(() => {
+      descriptionBlock.classList.remove("is-open");
+      descriptionContent.style.maxHeight = "0px";
+    });
+
+    window.setTimeout(() => {
+      descriptionBlock.removeAttribute("open");
+    }, 320);
+    return;
+  }
+
+  descriptionBlock.setAttribute("open", "");
+  descriptionContent.style.maxHeight = "0px";
+
+  requestAnimationFrame(() => {
+    descriptionBlock.classList.add("is-open");
+    descriptionContent.style.maxHeight = `${descriptionContent.scrollHeight}px`;
+  });
+}
+
+descriptionSummary?.addEventListener("click", (event) => {
+  event.preventDefault();
+  toggleDescriptionBlock();
+});
 
 function disableFirstInteractionResume() {
   window.removeEventListener("pointerdown", resumeAudioOnFirstInteraction);
@@ -212,7 +247,11 @@ applyForm?.addEventListener("submit", async (event) => {
     if (applyTypeInput) {
       applyTypeInput.value = result.application_type || applyTypeInput.value;
     }
-    setFormStatus("Application received. Check your email for the call link.", "is-success");
+    if (result.email_sent === false) {
+      setFormStatus("Application received. Email is not authorized yet; use the Cal link on the referral page or contact us.", "is-success");
+    } else {
+      setFormStatus("Application received. Check your email for the call link.", "is-success");
+    }
   } catch (error) {
     setFormStatus(error.message || "Something went wrong. Please try again.", "is-error");
   } finally {
