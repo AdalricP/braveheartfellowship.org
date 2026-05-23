@@ -17,7 +17,7 @@ const gridInteractiveControls = document.querySelectorAll(".links a, .audio-togg
 const canvas = document.querySelector(".cursor-grid");
 const ctx = canvas?.getContext("2d");
 const panelTransitionMs = 360;
-const applicationEndpointUrl = "https://script.google.com/macros/s/AKfycbwN3sEI4gc95pknGv5iVnjcMAeau2UdZO9pIm46PU3noD-1bEzZWoBKwtfDC891lWVw1Q/exec";
+const applicationEndpointUrl = "/api/apply";
 let panelSwitchTimer;
 
 const grid = {
@@ -204,7 +204,7 @@ applyForm?.addEventListener("submit", async (event) => {
 
   if (!applyForm.reportValidity()) return;
   if (!applicationEndpointUrl) {
-    setFormStatus("Set the application endpoint URL in script.js first.", "is-error");
+    setFormStatus("Application endpoint is unavailable.", "is-error");
     return;
   }
 
