@@ -583,7 +583,7 @@ p {
 .partners-grid {
   display: grid;
   gap: clamp(8px, 1vw, 14px);
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 100%;
 }
 
@@ -641,6 +641,28 @@ p {
   text-align: center;
   transition: color 320ms ease;
   white-space: nowrap;
+}
+
+.partner-card-logo {
+  display: block;
+  height: auto;
+  max-height: 42px;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.partner-logo-forge {
+  max-width: 210px;
+}
+
+.partner-logo-lotus {
+  max-width: 182px;
+}
+
+.partner-logo-lagrange {
+  border-radius: 8px;
+  max-width: 192px;
 }
 
 .signal-page {
@@ -1021,6 +1043,7 @@ p {
   }
 
   .partners-grid {
+    grid-template-columns: 1fr;
     gap: 6px;
   }
 
@@ -1028,6 +1051,10 @@ p {
     border-radius: 10px;
     min-height: 44px;
     padding: 8px 6px;
+  }
+
+  .partner-card-logo {
+    max-height: 34px;
   }
 
   .partner-card-name {

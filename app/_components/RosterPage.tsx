@@ -103,11 +103,23 @@ export default function RosterPage() {
   );
 }
 
-const partners: { name: string; href?: string }[] = [
-  { name: "Forge Residency", href: "https://forgeresidency.com" },
-  { name: "Aditya Vijay", href: "https://adi.ceo" },
-  { name: "Lotus Fund" },
-  { name: "Lang Ranch Point" },
+const partners: { name: string; href?: string; logo?: string; logoClassName?: string }[] = [
+  {
+    name: "Forge Residency",
+    href: "https://forgeresidency.com",
+    logo: "/assets/forge_logo.png",
+    logoClassName: "partner-logo-forge",
+  },
+  {
+    name: "Lotus Fund",
+    logo: "/assets/lotusfund.png",
+    logoClassName: "partner-logo-lotus",
+  },
+  {
+    name: "Lagrange Point",
+    logo: "/assets/lagrange_point_logo.jpg",
+    logoClassName: "partner-logo-lagrange",
+  },
 ];
 
 function Partners() {
@@ -123,7 +135,16 @@ function Partners() {
           const inner = (
             <>
               <div className="partner-card-glow" aria-hidden="true" />
-              <span className="partner-card-name">{p.name}</span>
+              {p.logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className={`partner-card-logo${p.logoClassName ? ` ${p.logoClassName}` : ""}`}
+                  src={p.logo}
+                  alt={p.name}
+                />
+              ) : (
+                <span className="partner-card-name">{p.name}</span>
+              )}
             </>
           );
 
@@ -150,4 +171,3 @@ function Partners() {
     </footer>
   );
 }
-
