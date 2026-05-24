@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import Airtable from "airtable";
 import { Resend } from "resend";
 
 export const runtime = "nodejs";
@@ -61,6 +60,53 @@ function buildEmailHtml(type: ApplyType, payload: ApplyPayload) {
   </div>`;
 }
 
+async function createAirtableRecord(baseId: string, pat: string, tableName: string, payload: ApplyPayload) {
+  const endpoint = new URL(
+    `/v0/${encodeURIComponent(baseId)}/${encodeURIComponent(tableName)}`,
+    "https://api.airtable.com",
+  );
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${pat}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      records: [
+        {
+          fields: {
+            Name: payload.name,
+            Email: payload.email,
+            "Referral Code": payload.referral_code,
+            "Work Description": payload.work_description,
+            "Scholar Link": payload.scholar_link || undefined,
+            "Social Link": payload.social_link || undefined,
+            "Proudest Work": payload.proudest_work,
+            Status: "Pending",
+            "Submitted At": new Date().toISOString(),
+          },
+        },
+      ],
+    }),
+  });
+
+  if (response.ok) return;
+
+  let message = "Airtable error.";
+
+  try {
+    const errorPayload = (await response.json()) as {
+      error?: { message?: string; type?: string };
+    };
+    message = errorPayload.error?.message || errorPayload.error?.type || message;
+  } catch {
+    message = response.statusText || message;
+  }
+
+  throw new Error(message);
+}
+
 export async function POST(request: Request) {
   let payload: ApplyPayload;
   try {
@@ -87,25 +133,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const base = new Airtable({ apiKey: pat }).base(baseId);
-  const table = base(tableNameFor(type));
-
   try {
-    await table.create([
-      {
-        fields: {
-          Name: payload.name,
-          Email: payload.email,
-          "Referral Code": payload.referral_code,
-          "Work Description": payload.work_description,
-          "Scholar Link": payload.scholar_link || undefined,
-          "Social Link": payload.social_link || undefined,
-          "Proudest Work": payload.proudest_work,
-          Status: "Pending",
-          "Submitted At": new Date().toISOString(),
-        },
-      },
-    ]);
+    await createAirtableRecord(baseId, pat, tableNameFor(type), payload);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Airtable error.";
     return NextResponse.json({ ok: false, message }, { status: 502 });

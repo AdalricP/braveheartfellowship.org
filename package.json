@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "airtable": "^0.12.2",
     "framer-motion": "^12.40.0",
     "next": "16.1.1",
     "react": "19.2.3",

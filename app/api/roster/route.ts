@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import Airtable from "airtable";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,27 +11,39 @@ type RosterRow = {
   image?: string;
 };
 
-type AirtableBase = ReturnType<Airtable["base"]>;
+type AirtableRecord = {
+  fields?: Record<string, unknown>;
+};
 
-function fieldStr(record: { get: (key: string) => unknown }, key: string): string {
-  const value = record.get(key);
+function fieldStr(record: AirtableRecord, key: string): string {
+  const value = record.fields?.[key];
   if (typeof value === "string") return value;
   if (typeof value === "number") return String(value);
   return "";
 }
 
-async function fetchApproved(
-  base: AirtableBase,
-  tableName: string,
-  defaultRole: string,
-): Promise<RosterRow[]> {
+async function fetchApproved(baseId: string, pat: string, tableName: string, defaultRole: string): Promise<RosterRow[]> {
   try {
-    const records = await base(tableName)
-      .select({
-        filterByFormula: '{Status} = "Approved"',
-        fields: ["Name", "Work Description", "Status"],
-      })
-      .all();
+    const endpoint = new URL(
+      `/v0/${encodeURIComponent(baseId)}/${encodeURIComponent(tableName)}`,
+      "https://api.airtable.com",
+    );
+    endpoint.searchParams.set("filterByFormula", '{Status} = "Approved"');
+    endpoint.searchParams.append("fields[]", "Name");
+    endpoint.searchParams.append("fields[]", "Work Description");
+    endpoint.searchParams.append("fields[]", "Status");
+
+    const response = await fetch(endpoint, {
+      headers: {
+        Authorization: `Bearer ${pat}`,
+      },
+      next: { revalidate: 0 },
+    });
+
+    if (!response.ok) return [];
+
+    const payload = (await response.json()) as { records?: AirtableRecord[] };
+    const records = payload.records || [];
 
     return records.map((record) => ({
       name: fieldStr(record, "Name"),
@@ -52,13 +63,12 @@ export async function GET() {
     return NextResponse.json({ ok: true, fellows: [], grantees: [] });
   }
 
-  const base = new Airtable({ apiKey: pat }).base(baseId);
   const fellowshipTable = process.env.AIRTABLE_TABLE_FELLOWSHIP || "Fellowship";
   const grantTable = process.env.AIRTABLE_TABLE_GRANT || "Grant";
 
   const [fellows, grantees] = await Promise.all([
-    fetchApproved(base, fellowshipTable, "fellowship"),
-    fetchApproved(base, grantTable, "micro grant"),
+    fetchApproved(baseId, pat, fellowshipTable, "fellowship"),
+    fetchApproved(baseId, pat, grantTable, "micro grant"),
   ]);
 
   return NextResponse.json({ ok: true, fellows, grantees });
