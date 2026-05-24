@@ -582,53 +582,42 @@ p {
 
 .partners-grid {
   display: grid;
-  gap: clamp(8px, 1vw, 14px);
+  gap: clamp(22px, 1.8vw, 32px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 100%;
 }
 
 .partner-card {
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 248, 235, 0.04), rgba(255, 248, 235, 0.01));
-  border: 1px solid rgba(255, 248, 235, 0.08);
-  border-radius: 12px;
+  aspect-ratio: 1.35 / 0.66;
+  background: rgba(8, 8, 8, 0.82);
+  border: 1px solid rgba(255, 248, 235, 0.06);
+  border-radius: 22px;
+  box-shadow: inset 0 0 0 1px rgba(255, 248, 235, 0.02);
   color: var(--ink);
   display: flex;
-  isolation: isolate;
   justify-content: center;
   margin: 0;
-  min-height: 56px;
   min-width: 0;
   overflow: hidden;
-  padding: clamp(12px, 1.4vw, 16px) clamp(10px, 1.4vw, 16px);
+  padding: clamp(18px, 2vw, 28px);
   position: relative;
   text-decoration: none;
-  transition: border-color 320ms cubic-bezier(0.22, 1, 0.36, 1), background 320ms ease;
+  transition:
+    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 320ms ease,
+    box-shadow 320ms ease;
 }
 
 .partner-card:hover {
-  border-color: rgba(255, 248, 235, 0.24);
+  border-color: rgba(255, 248, 235, 0.14);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 248, 235, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .partner-card-link:hover {
-  background: linear-gradient(180deg, rgba(255, 248, 235, 0.06), rgba(255, 248, 235, 0.02));
-}
-
-.partner-card-glow {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(214, 153, 71, 0.24), transparent 62%),
-    radial-gradient(circle at 50% 100%, rgba(255, 248, 235, 0.06), transparent 60%);
-  border-radius: inherit;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  transition: opacity 360ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: -1;
-}
-
-.partner-card:hover .partner-card-glow {
-  opacity: 1;
+  background: rgba(10, 10, 10, 0.9);
 }
 
 .partner-card-name {
@@ -646,23 +635,26 @@ p {
 .partner-card-logo {
   display: block;
   height: auto;
-  max-height: 42px;
-  max-width: 100%;
+  max-height: min(64%, 168px);
+  max-width: min(78%, 320px);
   object-fit: contain;
-  width: auto;
+  width: 100%;
 }
 
 .partner-logo-forge {
-  max-width: 210px;
+  max-height: min(54%, 132px);
+  max-width: min(64%, 240px);
 }
 
 .partner-logo-lotus {
-  max-width: 182px;
+  max-height: min(58%, 144px);
+  max-width: min(56%, 220px);
 }
 
 .partner-logo-lagrange {
-  border-radius: 8px;
-  max-width: 192px;
+  border-radius: 14px;
+  max-height: min(56%, 138px);
+  max-width: min(52%, 210px);
 }
 
 .signal-page {
@@ -678,83 +670,6 @@ p {
   display: grid;
   justify-items: center;
   text-align: center;
-}
-
-.signal-footer {
-  align-items: end;
-  bottom: clamp(28px, 5vh, 56px);
-  display: flex;
-  gap: clamp(16px, 3vw, 36px);
-  justify-content: space-between;
-  left: clamp(28px, 5vw, 76px);
-  pointer-events: none;
-  position: absolute;
-  right: clamp(28px, 5vw, 76px);
-  z-index: 2;
-}
-
-.signal-tagline {
-  color: rgba(255, 248, 235, 0.84);
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(1rem, 1.4vw, 1.28rem);
-  font-weight: 500;
-  letter-spacing: 0.005em;
-  line-height: 1.35;
-  margin: 0;
-  max-width: 36ch;
-  text-align: left;
-}
-
-.signal-email {
-  color: var(--ink);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: clamp(0.74rem, 1vw, 0.86rem);
-  letter-spacing: 0.16em;
-  pointer-events: auto;
-  position: relative;
-  text-align: right;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 220ms ease;
-  white-space: nowrap;
-}
-
-.signal-email::after {
-  background: linear-gradient(90deg, transparent, rgba(255, 248, 235, 0.6) 40%, rgba(255, 248, 235, 0.6) 60%, transparent);
-  bottom: -6px;
-  content: "";
-  height: 1px;
-  left: 0;
-  opacity: 0.5;
-  position: absolute;
-  right: 0;
-  transition: opacity 220ms ease;
-}
-
-.signal-email:hover {
-  color: var(--accent);
-}
-
-.signal-email:hover::after {
-  opacity: 1;
-}
-
-@media (max-width: 680px) {
-  .signal-footer {
-    bottom: 20px;
-    flex-direction: column;
-    gap: 14px;
-    left: 22px;
-    right: 22px;
-  }
-
-  .signal-tagline {
-    font-size: 0.92rem;
-  }
-
-  .signal-email {
-    font-size: 0.7rem;
-  }
 }
 
 @keyframes flicker {
@@ -961,12 +876,12 @@ p {
   }
 
   .partners-grid {
-    gap: 8px;
+    gap: 14px;
   }
 
   .partner-card {
-    min-height: 48px;
-    padding: 10px 8px;
+    border-radius: 18px;
+    padding: 16px;
   }
 
   .partner-card-name {
@@ -1044,17 +959,18 @@ p {
 
   .partners-grid {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 14px;
   }
 
   .partner-card {
-    border-radius: 10px;
-    min-height: 44px;
-    padding: 8px 6px;
+    aspect-ratio: 1.45 / 0.72;
+    border-radius: 18px;
+    padding: 18px 14px;
   }
 
   .partner-card-logo {
-    max-height: 34px;
+    max-height: min(60%, 124px);
+    max-width: min(72%, 260px);
   }
 
   .partner-card-name {

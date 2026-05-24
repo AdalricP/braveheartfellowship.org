@@ -122,7 +122,7 @@ export default function CursorGrid() {
       }
     }
 
-    function drawSignalWordmark(spacing: number) {
+    function drawSignalWordmark(spacing: number, shiftX: number, shiftY: number) {
       const wordmarkProgress = clamp((grid.signalProgress - 0.42) / 0.58, 0, 1);
       if (wordmarkProgress <= 0.01) return;
 
@@ -133,18 +133,13 @@ export default function CursorGrid() {
       const totalColumns = patterns.reduce((count, pattern, index) => {
         return count + pattern[0].length + (index < patterns.length - 1 ? letterGap : 0);
       }, 0);
-      const maxWordmarkWidth = grid.width * 0.88;
-      const maxWordmarkHeight = grid.height * 0.22;
-      const wordmarkSpacing = Math.max(
-        4,
-        Math.min(spacing, maxWordmarkWidth / totalColumns, maxWordmarkHeight / rowCount),
-      );
-      const wordmarkWidth = totalColumns * wordmarkSpacing;
-      const wordmarkHeight = rowCount * wordmarkSpacing;
+      const wordmarkWidth = (totalColumns - 1) * spacing;
+      const wordmarkHeight = (rowCount - 1) * spacing;
+      if (wordmarkWidth > grid.width * 0.9 || wordmarkHeight > grid.height * 0.34) return;
 
-      const anchorX = (grid.width - wordmarkWidth) / 2;
-      const anchorY = (grid.height - wordmarkHeight) / 2;
-      const squareSize = Math.max(2.5, wordmarkSpacing - 2);
+      const anchorX = Math.round(((grid.width - wordmarkWidth) / 2 - shiftX) / spacing) * spacing + shiftX;
+      const anchorY = Math.round(((grid.height - wordmarkHeight) / 2 - shiftY) / spacing) * spacing + shiftY;
+      const squareSize = Math.max(4, Math.floor(spacing * 0.32));
       const halfSquare = squareSize / 2;
       const time = performance.now() * 0.0024;
 
@@ -157,11 +152,12 @@ export default function CursorGrid() {
         pattern.forEach((row, rowIndex) => {
           row.split("").forEach((bit, colIndex) => {
             if (bit !== "1") return;
-            const cellX = anchorX + (columnOffset + colIndex) * wordmarkSpacing;
-            const cellY = anchorY + rowIndex * wordmarkSpacing;
+            const cellX = anchorX + (columnOffset + colIndex) * spacing;
+            const cellY = anchorY + rowIndex * spacing;
+            const warpedCell = gravityPoint(cellX, cellY);
             const flicker = 0.84 + (0.16 * Math.sin(time + (letterIndex * 0.8) + (rowIndex * 0.45) + (colIndex * 0.2)));
             ctx!.globalAlpha = Math.min(1, wordmarkProgress * Math.max(0.72, grid.opacity + 0.18) * flicker);
-            ctx!.fillRect(cellX - halfSquare, cellY - halfSquare, squareSize, squareSize);
+            ctx!.fillRect(warpedCell.x - halfSquare, warpedCell.y - halfSquare, squareSize, squareSize);
           });
         });
         columnOffset += pattern[0].length + letterGap;
@@ -206,7 +202,7 @@ export default function CursorGrid() {
         drawWarpedLine(points);
       }
 
-      drawSignalWordmark(spacing);
+      drawSignalWordmark(spacing, shiftX, shiftY);
       ctx!.globalAlpha = 1;
       frame = requestAnimationFrame(drawGrid);
     }

@@ -134,7 +134,6 @@ function Partners() {
         {partners.map((p, i) => {
           const inner = (
             <>
-              <div className="partner-card-glow" aria-hidden="true" />
               {p.logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -154,7 +153,7 @@ function Partners() {
             whileInView: { opacity: 1, y: 0 },
             viewport: { once: true, margin: "-10% 0px" },
             transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-            whileHover: { y: -4 },
+            whileHover: { y: -4, scale: 1.01 },
           };
 
           return p.href ? (
