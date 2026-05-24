@@ -149,7 +149,6 @@ function Partners() {
               ) : (
                 <span className="partner-card-name">{p.name}</span>
               )}
-              <span className="partner-card-label">{p.name}</span>
             </>
           );
 
