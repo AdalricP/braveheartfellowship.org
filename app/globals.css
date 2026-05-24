@@ -600,7 +600,7 @@ p {
   margin: 0;
   min-width: 0;
   overflow: hidden;
-  padding: clamp(18px, 2vw, 28px);
+  padding: clamp(6px, 0.8vw, 12px);
   position: relative;
   text-decoration: none;
   transition:
@@ -620,6 +620,20 @@ p {
   background: rgba(10, 10, 10, 0.9);
 }
 
+.partner-card-forge {
+  background: #090909;
+}
+
+.partner-card-lotus {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(244, 225, 230, 0.22), transparent 34%),
+    linear-gradient(180deg, #f7f2ee, #f3ece7);
+}
+
+.partner-card-lagrange {
+  background: #050505;
+}
+
 .partner-card-name {
   color: var(--ink);
   font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
@@ -634,27 +648,24 @@ p {
 
 .partner-card-logo {
   display: block;
-  height: auto;
-  max-height: min(64%, 168px);
-  max-width: min(78%, 320px);
+  height: 84%;
+  max-height: none;
+  max-width: none;
   object-fit: contain;
-  width: 100%;
+  width: auto;
 }
 
 .partner-logo-forge {
-  max-height: min(54%, 132px);
-  max-width: min(64%, 240px);
+  height: 80%;
 }
 
 .partner-logo-lotus {
-  max-height: min(58%, 144px);
-  max-width: min(56%, 220px);
+  height: 92%;
 }
 
 .partner-logo-lagrange {
   border-radius: 14px;
-  max-height: min(56%, 138px);
-  max-width: min(52%, 210px);
+  height: 82%;
 }
 
 .signal-page {
@@ -881,7 +892,7 @@ p {
 
   .partner-card {
     border-radius: 18px;
-    padding: 16px;
+    padding: 8px;
   }
 
   .partner-card-name {
@@ -965,12 +976,11 @@ p {
   .partner-card {
     aspect-ratio: 1.45 / 0.72;
     border-radius: 18px;
-    padding: 18px 14px;
+    padding: 10px;
   }
 
   .partner-card-logo {
-    max-height: min(60%, 124px);
-    max-width: min(72%, 260px);
+    height: 78%;
   }
 
   .partner-card-name {

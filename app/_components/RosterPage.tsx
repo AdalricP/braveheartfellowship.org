@@ -103,21 +103,24 @@ export default function RosterPage() {
   );
 }
 
-const partners: { name: string; href?: string; logo?: string; logoClassName?: string }[] = [
+const partners: { name: string; href?: string; logo?: string; logoClassName?: string; cardClassName?: string }[] = [
   {
     name: "Forge Residency",
     href: "https://forgeresidency.com",
     logo: "/assets/forge_logo.png",
+    cardClassName: "partner-card-forge",
     logoClassName: "partner-logo-forge",
   },
   {
     name: "Lotus Fund",
     logo: "/assets/lotusfund.png",
+    cardClassName: "partner-card-lotus",
     logoClassName: "partner-logo-lotus",
   },
   {
     name: "Lagrange Point",
     logo: "/assets/lagrange_point_logo.jpg",
+    cardClassName: "partner-card-lagrange",
     logoClassName: "partner-logo-lagrange",
   },
 ];
@@ -148,7 +151,7 @@ function Partners() {
           );
 
           const motionProps = {
-            className: `partner-card${p.href ? " partner-card-link" : ""}`,
+            className: `partner-card${p.href ? " partner-card-link" : ""}${p.cardClassName ? ` ${p.cardClassName}` : ""}`,
             initial: { opacity: 0, y: 18 },
             whileInView: { opacity: 1, y: 0 },
             viewport: { once: true, margin: "-10% 0px" },
