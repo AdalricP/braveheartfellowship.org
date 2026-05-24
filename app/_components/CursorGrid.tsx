@@ -133,13 +133,20 @@ export default function CursorGrid() {
       const totalColumns = patterns.reduce((count, pattern, index) => {
         return count + pattern[0].length + (index < patterns.length - 1 ? letterGap : 0);
       }, 0);
-      const wordmarkWidth = (totalColumns - 1) * spacing;
-      const wordmarkHeight = (rowCount - 1) * spacing;
+      const wordmarkWidth = totalColumns * spacing;
+      const wordmarkHeight = rowCount * spacing;
       if (wordmarkWidth > grid.width * 0.9 || wordmarkHeight > grid.height * 0.34) return;
 
-      const anchorX = Math.round(((grid.width - wordmarkWidth) / 2 - shiftX) / spacing) * spacing + shiftX;
-      const anchorY = Math.round(((grid.height - wordmarkHeight) / 2 - shiftY) / spacing) * spacing + shiftY;
-      const squareSize = Math.max(4, Math.floor(spacing * 0.32));
+      const cellOffset = spacing / 2;
+      const anchorX =
+        Math.round(((grid.width - wordmarkWidth) / 2 - shiftX - cellOffset) / spacing) * spacing +
+        shiftX +
+        cellOffset;
+      const anchorY =
+        Math.round(((grid.height - wordmarkHeight) / 2 - shiftY - cellOffset) / spacing) * spacing +
+        shiftY +
+        cellOffset;
+      const squareSize = Math.max(10, Math.floor(spacing * 0.72));
       const halfSquare = squareSize / 2;
       const time = performance.now() * 0.0024;
 
