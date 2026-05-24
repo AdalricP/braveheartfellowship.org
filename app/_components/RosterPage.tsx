@@ -113,12 +113,14 @@ const partners: { name: string; href?: string; logo?: string; logoClassName?: st
   },
   {
     name: "Lotus Fund",
+    href: "https://lotusfund.org",
     logo: "/assets/lotusfund.png",
     cardClassName: "partner-card-lotus",
     logoClassName: "partner-logo-lotus",
   },
   {
     name: "Lagrange Point",
+    href: "https://lagrangepoint.org",
     logo: "/assets/lagrange_point_logo.jpg",
     cardClassName: "partner-card-lagrange",
     logoClassName: "partner-logo-lagrange",

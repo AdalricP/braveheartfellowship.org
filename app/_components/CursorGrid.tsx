@@ -127,7 +127,7 @@ export default function CursorGrid() {
       if (wordmarkProgress <= 0.01) return;
 
       const text = "BRAVEHEART";
-      const letterGap = 1;
+      const letterGap = 0;
       const rowCount = 7;
       const patterns = text.split("").map((letter) => pixelAlphabet[letter]).filter(Boolean) as string[][];
       const totalColumns = patterns.reduce((count, pattern, index) => {
@@ -135,7 +135,7 @@ export default function CursorGrid() {
       }, 0);
       const wordmarkWidth = totalColumns * spacing;
       const wordmarkHeight = rowCount * spacing;
-      if (wordmarkWidth > grid.width * 0.9 || wordmarkHeight > grid.height * 0.34) return;
+      if (wordmarkWidth > grid.width * 0.96 || wordmarkHeight > grid.height * 0.4) return;
 
       const cellOffset = spacing / 2;
       const anchorX =
@@ -188,8 +188,8 @@ export default function CursorGrid() {
       ctx!.strokeStyle = "rgba(255, 248, 235, 0.18)";
       ctx!.lineWidth = 1;
 
-      const spacing = 26;
-      const step = 10;
+      const spacing = grid.width < 1400 ? 22 : 26;
+      const step = Math.max(8, Math.round(spacing * 0.38));
       const shiftX = (grid.easedX / grid.width - 0.5) * 14;
       const shiftY = (grid.easedY / grid.height - 0.5) * 10;
 
