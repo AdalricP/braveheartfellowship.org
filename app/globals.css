@@ -606,7 +606,6 @@ p {
   text-decoration: none;
   transition:
     border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 320ms ease,
     box-shadow 320ms ease,
     transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -618,18 +617,12 @@ p {
     0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
-.partner-card-link:hover {
-  background: rgba(10, 10, 10, 0.9);
-}
-
 .partner-card-forge {
   background: #090909;
 }
 
 .partner-card-lotus {
-  background:
-    radial-gradient(circle at 50% 46%, rgba(244, 225, 230, 0.22), transparent 34%),
-    linear-gradient(180deg, #f7f2ee, #f3ece7);
+  background: #ffffff;
 }
 
 .partner-card-lagrange {
@@ -673,9 +666,7 @@ p {
 
 .partner-card-label {
   align-items: center;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 248, 235, 0.14), transparent 54%),
-    rgba(7, 7, 5, 0.94);
+  background: rgba(7, 7, 5, 0.96);
   color: var(--ink);
   display: flex;
   font-family: "IBM Plex Mono", monospace;
@@ -690,22 +681,19 @@ p {
   position: absolute;
   text-align: center;
   text-transform: uppercase;
-  transform: scale(1.025);
-  transition:
-    opacity 320ms ease,
-    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: none;
+  transition: opacity 240ms ease;
 }
 
 .partner-card:hover .partner-card-label,
 .partner-card:focus-visible .partner-card-label {
   opacity: 1;
-  transform: scale(1);
 }
 
 .partner-card:hover .partner-card-logo,
 .partner-card:focus-visible .partner-card-logo {
-  opacity: 0;
-  transform: scale(0.96);
+  opacity: 1;
+  transform: none;
 }
 
 .signal-page {
