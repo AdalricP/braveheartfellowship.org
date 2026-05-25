@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     "Braveheart Fellowship backs founders & researchers willing to go against the world in pursuit of truth.",
   icons: {
     icon: "/icon.png",
+    shortcut: "/icon.png",
     apple: "/apple-icon.png",
   },
 };
