@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Braveheart Fellowship",
+  title: {
+    default: "Braveheart Fellowship",
+    template: "%s | Braveheart Fellowship",
+  },
   description:
     "Braveheart Fellowship backs founders & researchers willing to go against the world in pursuit of truth.",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/assets/icon.png",
+    shortcut: "/assets/icon.png",
+    apple: "/assets/icon.png",
   },
 };
 
