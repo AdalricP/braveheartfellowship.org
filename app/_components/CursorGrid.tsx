@@ -56,17 +56,23 @@ export default function CursorGrid() {
       const activePage = pages[activePageIndex];
       const gridMode = activePage?.dataset.gridMode || "";
       const isSignalPage = gridMode === "signal";
+      const hideSignalGrid = isSignalPage && window.innerWidth <= 680;
       grid.isSignalMode = isSignalPage;
       grid.targetFullPage = false;
-      grid.targetBaseAlpha = Math.max(grid.signalProgress * 0.28, panelGridHover ? 0.3 : 0);
+      grid.targetBaseAlpha = hideSignalGrid ? 0 : Math.max(grid.signalProgress * 0.28, panelGridHover ? 0.3 : 0);
       grid.targetRevealScale = 1;
-      grid.targetOpacity = isSignalPage ? 0.2 : 0;
+      grid.targetOpacity = hideSignalGrid ? 0 : isSignalPage ? 0.2 : 0;
       grid.targetWarp = 0;
     }
 
     function updateSignalProgress() {
       const signalPage = document.querySelector<HTMLElement>("[data-grid-mode='signal']");
       if (!signalPage) return;
+      if (window.innerWidth <= 680) {
+        grid.signalProgress += (0 - grid.signalProgress) * 0.08;
+        grid.targetBaseAlpha = panelGridHover ? 0.3 : 0;
+        return;
+      }
       const start = signalPage.offsetTop - window.innerHeight * 0.85;
       const end = signalPage.offsetTop + window.innerHeight * 0.12;
       const nextProgress = clamp((window.scrollY - start) / (end - start), 0, 1);
