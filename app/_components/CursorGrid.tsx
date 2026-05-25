@@ -138,14 +138,8 @@ export default function CursorGrid() {
       if (wordmarkWidth > grid.width * 0.96 || wordmarkHeight > grid.height * 0.4) return;
 
       const cellOffset = spacing / 2;
-      const anchorX =
-        Math.round(((grid.width - wordmarkWidth) / 2 - shiftX - cellOffset) / spacing) * spacing +
-        shiftX +
-        cellOffset;
-      const anchorY =
-        Math.round(((grid.height - wordmarkHeight) / 2 - shiftY - cellOffset) / spacing) * spacing +
-        shiftY +
-        cellOffset;
+      const anchorX = Math.floor((grid.width - wordmarkWidth) / (2 * spacing)) * spacing + shiftX + cellOffset;
+      const anchorY = Math.floor((grid.height - wordmarkHeight) / (2 * spacing)) * spacing + shiftY + cellOffset;
       const squareSize = Math.max(10, spacing - 3);
       const halfSquare = squareSize / 2;
       const time = performance.now() * 0.0024;
