@@ -213,19 +213,6 @@ body::after {
   position: relative;
 }
 
-.description-block li::before {
-  background: var(--ink);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(9, 9, 7, 0.72);
-  content: "";
-  height: 7px;
-  left: -21px;
-  position: absolute;
-  top: 0.56em;
-  transform: translateY(-50%);
-  width: 7px;
-}
-
 h1 {
   font-size: 5.4rem;
   font-weight: 500;
