@@ -66,6 +66,20 @@ export function ApplyPanelProvider({ children }: { children: React.ReactNode }) 
     };
   }, [isOpen, close]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const { style: bodyStyle } = document.body;
+    const { style: htmlStyle } = document.documentElement;
+    const previousBodyOverflow = bodyStyle.overflow;
+    const previousHtmlOverflow = htmlStyle.overflow;
+    bodyStyle.overflow = "hidden";
+    htmlStyle.overflow = "hidden";
+    return () => {
+      bodyStyle.overflow = previousBodyOverflow;
+      htmlStyle.overflow = previousHtmlOverflow;
+    };
+  }, [isOpen]);
+
   const value = useMemo(() => ({ isOpen, applyType, open, close }), [isOpen, applyType, open, close]);
   return <ApplyPanelCtx.Provider value={value}>{children}</ApplyPanelCtx.Provider>;
 }
