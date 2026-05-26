@@ -343,9 +343,7 @@ p {
   padding: 22px;
 }
 
-.support-card p,
-.roster-card p,
-.roster-empty p {
+.support-card p {
   font-size: 0.98rem;
   max-width: none;
 }
@@ -434,106 +432,6 @@ p {
 
 .path-diagram span:last-child::after {
   display: none;
-}
-
-.roster-layout {
-  display: grid;
-  gap: 26px;
-}
-
-.roster-header {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.roster-list {
-  display: grid;
-  gap: 16px;
-  max-width: 960px;
-  width: 100%;
-}
-
-.roster-card {
-  align-items: start;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 248, 235, 0.18);
-  border-radius: 0;
-  box-shadow: none;
-  display: grid;
-  gap: 14px;
-  grid-template-columns: 92px minmax(0, 1fr);
-  min-width: 0;
-  padding: 18px 0;
-}
-
-.roster-avatar {
-  aspect-ratio: 1;
-  background:
-    radial-gradient(circle at 50% 35%, rgba(255, 248, 235, 0.22), rgba(255, 248, 235, 0) 40%),
-    linear-gradient(180deg, rgba(214, 153, 71, 0.18), rgba(255, 248, 235, 0.05));
-  border: 1px solid rgba(255, 248, 235, 0.18);
-  border-radius: 18px;
-  overflow: hidden;
-  position: relative;
-}
-
-.roster-avatar img {
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
-.roster-avatar-fallback {
-  align-items: center;
-  color: rgba(255, 248, 235, 0.9);
-  display: grid;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 1.35rem;
-  height: 100%;
-  letter-spacing: 0.1em;
-  width: 100%;
-  justify-content: center;
-}
-
-.roster-body {
-  display: grid;
-  gap: 8px;
-  min-width: 0;
-}
-
-.roster-name {
-  color: var(--ink);
-  font-size: 1.04rem;
-  line-height: 1.15;
-  overflow-wrap: anywhere;
-}
-
-.roster-role {
-  color: rgba(255, 248, 235, 0.56);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.roster-note {
-  color: rgba(255, 248, 235, 0.74);
-  font-size: 0.94rem;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.roster-empty {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  padding: 0;
-}
-
-.roster-empty p {
-  max-width: 640px;
 }
 
 .signal-page {
@@ -749,14 +647,6 @@ p {
     min-height: auto;
   }
 
-  .roster-layout {
-    gap: 22px;
-  }
-
-  .roster-card {
-    grid-template-columns: 72px minmax(0, 1fr);
-  }
-
 }
 
 @media (max-width: 680px) {
@@ -810,16 +700,6 @@ p {
 
   .links a {
     width: max-content;
-  }
-
-  .roster-layout {
-    align-content: start;
-    gap: 20px;
-  }
-
-  .roster-card {
-    gap: 13px;
-    grid-template-columns: 64px minmax(0, 1fr);
   }
 
   .section-jump {
@@ -880,20 +760,6 @@ p {
     padding-left: 18px;
   }
 
-  .roster-card {
-    gap: 12px;
-    grid-template-columns: 58px minmax(0, 1fr);
-    padding: 14px 0;
-  }
-
-  .roster-avatar {
-    border-radius: 14px;
-  }
-
-  .roster-empty {
-    padding: 0;
-  }
-
   .section-jump {
     height: 38px;
     width: 38px;
@@ -914,12 +780,4 @@ p {
     font-size: 2.35rem;
   }
 
-  .roster-card {
-    grid-template-columns: 1fr;
-  }
-
-  .roster-avatar {
-    max-width: 74px;
-    width: 100%;
-  }
 }

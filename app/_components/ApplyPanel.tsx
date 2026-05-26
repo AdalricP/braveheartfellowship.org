@@ -42,9 +42,8 @@ export default function ApplyPanel() {
       if (!response.ok || !result.ok) {
         if (result.code === "INVALID_REFERRAL") {
           setStatus({
-            message: 'Referral code is not valid. <a href="#fellows-grantees">See fellows / grantees.</a>',
+            message: "Referral code is not valid.",
             tone: "is-error",
-            html: true,
           });
           return;
         }
