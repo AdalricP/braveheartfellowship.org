@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 type RosterItem = {
   name: string;
@@ -97,82 +96,7 @@ export default function RosterPage() {
             items.map((item, i) => <RosterCard key={`${item.name}-${i}`} item={item} type="all" />)
           )}
         </div>
-        <Partners />
       </div>
     </section>
-  );
-}
-
-const partners: { name: string; href?: string; logo?: string; logoClassName?: string; cardClassName?: string }[] = [
-  {
-    name: "Forge Residency",
-    href: "https://forgeresidency.com",
-    logo: "/assets/forge_logo.png",
-    cardClassName: "partner-card-forge",
-    logoClassName: "partner-logo-forge",
-  },
-  {
-    name: "Lotus Fund",
-    href: "https://lotusfund.org",
-    logo: "/assets/lotusfund.png",
-    cardClassName: "partner-card-lotus",
-    logoClassName: "partner-logo-lotus",
-  },
-  {
-    name: "Lagrange Point",
-    href: "https://lagrangepoint.org",
-    logo: "/assets/lagrange_point_logo.jpg",
-    cardClassName: "partner-card-lagrange",
-    logoClassName: "partner-logo-lagrange",
-  },
-];
-
-function Partners() {
-  return (
-    <footer className="partners-section" aria-label="Braveheart partners">
-      <div className="partners-eyebrow">
-        <span className="partners-line" />
-        <p className="partners-title">Partners</p>
-        <span className="partners-line" />
-      </div>
-      <div className="partners-grid">
-        {partners.map((p, i) => {
-          const inner = (
-            <>
-              {p.logo ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  className={`partner-card-logo${p.logoClassName ? ` ${p.logoClassName}` : ""}`}
-                  src={p.logo}
-                  alt={p.name}
-                />
-              ) : (
-                <span className="partner-card-name">{p.name}</span>
-              )}
-              <span className="partner-card-label">{p.name}</span>
-            </>
-          );
-
-          const motionProps = {
-            className: `partner-card${p.href ? " partner-card-link" : ""}${p.cardClassName ? ` ${p.cardClassName}` : ""}`,
-            initial: { opacity: 0, y: 18 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true, margin: "-10% 0px" },
-            transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-            whileHover: { y: -4, scale: 1.01 },
-          };
-
-          return p.href ? (
-            <motion.a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" {...motionProps}>
-              {inner}
-            </motion.a>
-          ) : (
-            <motion.div key={p.name} {...motionProps}>
-              {inner}
-            </motion.div>
-          );
-        })}
-      </div>
-    </footer>
   );
 }

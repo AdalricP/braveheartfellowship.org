@@ -536,153 +536,6 @@ p {
   max-width: 640px;
 }
 
-.partners-section {
-  display: grid;
-  gap: clamp(24px, 3.5vw, 40px);
-  margin-top: clamp(40px, 6vw, 88px);
-  width: 100%;
-}
-
-.partners-eyebrow {
-  align-items: center;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr auto 1fr;
-  width: 100%;
-}
-
-.partners-line {
-  background: linear-gradient(90deg, transparent, rgba(255, 248, 235, 0.22), transparent);
-  display: block;
-  height: 1px;
-  width: 100%;
-}
-
-.partners-title {
-  color: rgba(255, 248, 235, 0.7);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.32em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.partners-grid {
-  display: grid;
-  gap: clamp(18px, 1.8vw, 28px);
-  grid-template-columns: repeat(3, minmax(0, min(100%, 260px)));
-  justify-content: center;
-  width: 100%;
-}
-
-.partner-card {
-  align-items: center;
-  aspect-ratio: 1;
-  background: rgba(8, 8, 8, 0.82);
-  border: 1px solid rgba(255, 248, 235, 0.06);
-  border-radius: 18px;
-  box-shadow: inset 0 0 0 1px rgba(255, 248, 235, 0.02);
-  color: var(--ink);
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  min-width: 0;
-  overflow: hidden;
-  padding: clamp(6px, 0.8vw, 12px);
-  position: relative;
-  text-decoration: none;
-  transition:
-    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 320ms ease,
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.partner-card:hover {
-  border-color: rgba(255, 248, 235, 0.14);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 248, 235, 0.04),
-    0 18px 40px rgba(0, 0, 0, 0.18);
-}
-
-.partner-card-forge {
-  background: #090909;
-}
-
-.partner-card-lotus {
-  background: #ffffff;
-}
-
-.partner-card-lagrange {
-  background: #050505;
-}
-
-.partner-card-name {
-  color: var(--ink);
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(0.78rem, 0.95vw, 0.92rem);
-  font-weight: 500;
-  letter-spacing: 0.005em;
-  line-height: 1.2;
-  text-align: center;
-  transition: color 320ms ease;
-  white-space: nowrap;
-}
-
-.partner-card-logo {
-  display: block;
-  height: 72%;
-  max-height: none;
-  max-width: none;
-  object-fit: contain;
-  transition: opacity 320ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  width: auto;
-}
-
-.partner-logo-forge {
-  height: 66%;
-}
-
-.partner-logo-lotus {
-  height: 76%;
-}
-
-.partner-logo-lagrange {
-  border-radius: 14px;
-  height: 68%;
-}
-
-.partner-card-label {
-  align-items: center;
-  background: rgba(7, 7, 5, 0.96);
-  color: var(--ink);
-  display: flex;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: clamp(0.78rem, 1vw, 0.96rem);
-  font-weight: 500;
-  inset: 0;
-  justify-content: center;
-  letter-spacing: 0.14em;
-  opacity: 0;
-  padding: 20px;
-  pointer-events: none;
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
-  transform: none;
-  transition: opacity 240ms ease;
-}
-
-.partner-card:hover .partner-card-label,
-.partner-card:focus-visible .partner-card-label {
-  opacity: 1;
-}
-
-.partner-card:hover .partner-card-logo,
-.partner-card:focus-visible .partner-card-logo {
-  opacity: 1;
-  transform: none;
-}
-
 .signal-page {
   overflow: hidden;
 }
@@ -904,19 +757,6 @@ p {
     grid-template-columns: 72px minmax(0, 1fr);
   }
 
-  .partners-grid {
-    gap: 14px;
-    grid-template-columns: repeat(3, minmax(0, 190px));
-  }
-
-  .partner-card {
-    border-radius: 18px;
-    padding: 8px;
-  }
-
-  .partner-card-name {
-    font-size: 0.78rem;
-  }
 }
 
 @media (max-width: 680px) {
@@ -980,37 +820,6 @@ p {
   .roster-card {
     gap: 13px;
     grid-template-columns: 64px minmax(0, 1fr);
-  }
-
-  .partners-section {
-    gap: 18px;
-    margin-top: 28px;
-  }
-
-  .partners-grid {
-    gap: 8px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .partner-card {
-    aspect-ratio: 1;
-    border-radius: 12px;
-    padding: 6px;
-  }
-
-  .partner-card-logo {
-    height: 62%;
-  }
-
-  .partner-card-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-    padding: 8px;
-  }
-
-  .partner-card-name {
-    font-size: 0.72rem;
-    white-space: normal;
   }
 
   .section-jump {
@@ -1083,15 +892,6 @@ p {
 
   .roster-empty {
     padding: 0;
-  }
-
-  .partners-title {
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-  }
-
-  .partner-card-name {
-    font-size: 0.66rem;
   }
 
   .section-jump {
