@@ -54,13 +54,13 @@ export default function HeroPage() {
               <span aria-hidden="true">→</span>
             </a>
             <a
-              href={revealed ? "mailto:applications@braveheartfellowship.org" : "#contact"}
+              href={revealed ? "mailto:aryan@braveheartfellowship.org" : "#contact"}
               data-contact-link
               data-revealed={revealed ? "true" : undefined}
               onClick={onContact}
             >
               <span className={`contact-text${changing ? " is-changing" : ""}`}>
-                {revealed ? "applications@braveheartfellowship.org" : "contact"}
+                {revealed ? "aryan@braveheartfellowship.org" : "contact"}
               </span>
               <span className={`contact-arrow${changing ? " is-changing" : ""}`} aria-hidden="true">
                 {revealed ? "↗" : "→"}
