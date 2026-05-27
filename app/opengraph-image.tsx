@@ -13,7 +13,7 @@ export default function Image() {
       <div
         style={{
           alignItems: "stretch",
-          background: "#070705",
+          background: "#5a0a14",
           color: "#fff8eb",
           display: "flex",
           height: "100%",
@@ -25,7 +25,7 @@ export default function Image() {
         <div
           style={{
             background:
-              "radial-gradient(circle at 78% 22%, rgba(214, 153, 71, 0.34), transparent 30%), radial-gradient(circle at 23% 72%, rgba(255, 248, 235, 0.16), transparent 28%), linear-gradient(135deg, rgba(7, 7, 5, 1) 0%, rgba(21, 18, 13, 1) 54%, rgba(7, 7, 5, 1) 100%)",
+              "radial-gradient(circle at 78% 22%, rgba(214, 153, 71, 0.28), transparent 30%), radial-gradient(circle at 22% 76%, rgba(255, 248, 235, 0.14), transparent 30%), linear-gradient(135deg, #5a0a14 0%, #6f101b 48%, #3f0710 100%)",
             display: "flex",
             inset: 0,
             position: "absolute",
@@ -48,6 +48,19 @@ export default function Image() {
             display: "flex",
             inset: 38,
             position: "absolute",
+          }}
+        />
+        <img
+          alt=""
+          src="https://braveheartfellowship.org/assets/icon.png"
+          style={{
+            borderRadius: 24,
+            height: 118,
+            objectFit: "cover",
+            position: "absolute",
+            right: 78,
+            top: 70,
+            width: 118,
           }}
         />
         <div
