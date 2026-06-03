@@ -117,7 +117,7 @@ export async function POST(request: Request) {
 
   const type = normalizeType(payload.application_type);
 
-  if (!payload.name || !payload.email || !payload.referral_code || !payload.work_description || !payload.proudest_work) {
+  if (!payload.name || !payload.email || !payload.work_description || !payload.proudest_work) {
     return NextResponse.json(
       { ok: false, message: "Missing required fields." },
       { status: 400 },

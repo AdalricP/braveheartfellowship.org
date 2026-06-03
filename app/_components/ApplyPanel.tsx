@@ -30,7 +30,7 @@ export default function ApplyPanel() {
     };
 
     setSubmitting(true);
-    setStatus({ message: "Checking referral code...", tone: "" });
+    setStatus({ message: "Submitting application...", tone: "" });
 
     try {
       const response = await fetch("/api/apply", {
@@ -96,7 +96,6 @@ export default function ApplyPanel() {
             autoComplete="off"
             placeholder="Referral code"
             aria-label="Referral code"
-            required
           />
         </label>
         <label>
