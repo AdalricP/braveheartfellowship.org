@@ -1,75 +1,40 @@
 "use client";
 
-import { useState } from "react";
-import DescriptionBlock from "./DescriptionBlock";
+import PixelPainting from "./PixelPainting";
+import Reveal from "./Reveal";
 import { useApplyPanel } from "./ApplyPanelContext";
 
 export default function HeroPage() {
   const { open } = useApplyPanel();
-  const [revealed, setRevealed] = useState(false);
-  const [changing, setChanging] = useState(false);
-
-  const onContact = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (revealed) return;
-    event.preventDefault();
-    setChanging(true);
-    window.setTimeout(() => {
-      setRevealed(true);
-      setChanging(false);
-    }, 180);
-  };
 
   return (
-    <section className="page hero-page" id="hero" data-page>
-      <div className="page-inner">
-        <section className="intro">
-          <h1>Braveheart Fellowship</h1>
-          <p>
-            Audentes Fortuna Iuvat, Fortune favours the bold.<br />
-            We back young founders and researchers willing to go against the world in pursuit of truth.
-          </p>
-          <nav className="links" aria-label="Primary links">
-            <a
-              href="#fellowship"
-              data-open-apply
-              data-apply-type="fellowship"
-              onClick={(e) => {
-                e.preventDefault();
-                open("fellowship");
-              }}
-            >
-              <span>fellowship</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a
-              href="#grant"
-              data-open-apply
-              data-apply-type="grant"
-              onClick={(e) => {
-                e.preventDefault();
-                open("grant");
-              }}
-            >
-              <span>grant</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a
-              href={revealed ? "mailto:aryan@braveheartfellowship.org" : "#contact"}
-              data-contact-link
-              data-revealed={revealed ? "true" : undefined}
-              onClick={onContact}
-            >
-              <span className={`contact-text${changing ? " is-changing" : ""}`}>
-                {revealed ? "aryan@braveheartfellowship.org" : "contact"}
-              </span>
-              <span className={`contact-arrow${changing ? " is-changing" : ""}`} aria-hidden="true">
-                {revealed ? "↗" : "→"}
-              </span>
-            </a>
-          </nav>
-        </section>
+    <section className="band hero" id="top">
+      <div className="wrap hero-grid">
+        <Reveal as="header" className="hero-head">
+          <p className="eyebrow">Audentes Fortuna Iuvat · Fortune favours the bold</p>
+          <h1 className="display">
+            We back the ones who go <em>against the world</em> in pursuit of truth.
+          </h1>
+        </Reveal>
 
-        <DescriptionBlock />
+        <Reveal delay={120}>
+          <PixelPainting />
+        </Reveal>
+
+        <Reveal delay={80} className="hero-lede-row">
+          <p className="lede">
+            Braveheart finds young founders and researchers at the very start — often working alone,
+            often from underprivileged backgrounds — and becomes their first believer.
+          </p>
+          <div className="cta-row">
+            <button type="button" className="btn" onClick={() => open("fellowship")}>
+              Apply for the fellowship <span className="arrow" aria-hidden="true">↗</span>
+            </button>
+            <button type="button" className="btn btn-ghost" onClick={() => open("grant")}>
+              Request a micro-grant <span className="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

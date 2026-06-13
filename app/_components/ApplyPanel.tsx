@@ -69,15 +69,17 @@ export default function ApplyPanel() {
   }
 
   return (
-    <aside
-      id="apply-panel"
-      className={`apply-panel${isOpen ? " is-open" : ""}`}
-      aria-hidden={!isOpen}
-      aria-labelledby="apply-title"
-    >
-      <button type="button" className="panel-close" aria-label="Close application" onClick={close}>
-        →
-      </button>
+    <>
+      <div className={`apply-backdrop${isOpen ? " is-open" : ""}`} aria-hidden="true" onClick={close} />
+      <aside
+        id="apply-panel"
+        className={`apply-panel${isOpen ? " is-open" : ""}`}
+        aria-hidden={!isOpen}
+        aria-labelledby="apply-title"
+      >
+        <button type="button" className="panel-close" aria-label="Close application" onClick={close}>
+          ✕
+        </button>
       <div className="panel-heading">
         <span>application</span>
         <h2 id="apply-title">{label}</h2>
@@ -151,6 +153,7 @@ export default function ApplyPanel() {
           </p>
         )}
       </form>
-    </aside>
+      </aside>
+    </>
   );
 }

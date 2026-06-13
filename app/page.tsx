@@ -1,18 +1,24 @@
 import { ApplyPanelProvider } from "./_components/ApplyPanelContext";
 import ApplyPanel from "./_components/ApplyPanel";
-import CursorGrid from "./_components/CursorGrid";
+import Header from "./_components/Header";
 import HeroPage from "./_components/HeroPage";
-import SectionJump from "./_components/SectionJump";
-import SignalPage from "./_components/SignalPage";
+import Manifesto from "./_components/Manifesto";
+import Offer from "./_components/Offer";
+import WhoWeBack from "./_components/WhoWeBack";
+import Roster from "./_components/Roster";
+import Closing from "./_components/Closing";
 
 export default function Home() {
   return (
     <ApplyPanelProvider>
-      <CursorGrid />
-      <SectionJump />
-      <main className="site-shell" aria-label="Braveheart Fellowship">
+      <Header />
+      <main className="site" aria-label="Braveheart Fellowship">
         <HeroPage />
-        <SignalPage />
+        <Manifesto />
+        <Offer />
+        <WhoWeBack />
+        <Roster />
+        <Closing />
       </main>
       <ApplyPanel />
     </ApplyPanelProvider>
