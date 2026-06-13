@@ -79,6 +79,28 @@ a {
   gap: clamp(48px, 8vh, 84px);
 }
 
+/* ---------- Corner mark ---------- */
+
+.site-mark {
+  position: fixed;
+  top: clamp(18px, 3vw, 32px);
+  right: clamp(18px, 3vw, 32px);
+  width: clamp(34px, 4.5vw, 46px);
+  z-index: 30;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.site-mark:hover {
+  opacity: 0.6;
+}
+
+.site-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- Framed painting ---------- */
 
 .frame-figure {

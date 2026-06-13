@@ -11,6 +11,10 @@ export default function Landing() {
 
   return (
     <main className="shell">
+      <a className="site-mark" href="/" aria-label="Braveheart Fellowship">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/braveheart-mark.png" alt="Braveheart" />
+      </a>
       <div className="stack">
         <PixelPainting />
 
