@@ -18,8 +18,10 @@ export default function Landing() {
           <h1 className="brand">Braveheart Fellowship</h1>
           <p className="tagline">Audentes Fortuna Iuvat.</p>
           <p className="intro">
-            We back young people doing important research the world needs — work that can pay its own
-            way — and become their first believer.
+            Starting early is hard. The best researchers do it anyways. We want to bet on the best
+            scientific, entrepreneurial and innovation talent in the world, right at the start of their
+            journey when they have zero credentials. Ability can be built; attitude and competency
+            matter more.
           </p>
         </section>
 

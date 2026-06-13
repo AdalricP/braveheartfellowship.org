@@ -95,8 +95,8 @@ a {
 
 .frame {
   width: 100%;
-  background: var(--frame);
-  padding: clamp(8px, 1.2vw, 14px);
+  background: none;
+  padding: 0;
 }
 
 .frame canvas {
@@ -131,9 +131,9 @@ a {
 
 .intro {
   margin-top: 22px;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  line-height: 1.45;
-  max-width: 32ch;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 48ch;
 }
 
 /* ---------- What you get ---------- */
