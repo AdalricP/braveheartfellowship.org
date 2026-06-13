@@ -25,12 +25,10 @@ export default function Landing() {
 
         <section>
           <p className="block-title">What you get</p>
-          <ul className="give-list">
-            <li>Access to journals</li>
-            <li>The research network</li>
-            <li>AI, cloud compute, and deep research</li>
-            <li>Equipment, hardware, and the lab</li>
-          </ul>
+          <p className="give-text">
+            A one-year program with access to the best professor networks, the models, and the
+            journals — everything you need to do groundbreaking research from your basement.
+          </p>
         </section>
 
         <nav className="actions" aria-label="Apply">
