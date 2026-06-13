@@ -13,8 +13,6 @@ export default function Landing() {
         <PixelPainting />
 
         <section>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="logo-mark" src="/assets/icon.png" alt="Braveheart" />
           <h1 className="brand">Braveheart Fellowship</h1>
           <p className="tagline">Audentes Fortuna Iuvat.</p>
           <p className="intro">
