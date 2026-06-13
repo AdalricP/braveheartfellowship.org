@@ -11,10 +11,8 @@ export default function Landing() {
 
   return (
     <main className="shell">
-      <a className="site-mark" href="/" aria-label="Braveheart Fellowship">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/braveheart-mark.png" alt="Braveheart" />
-      </a>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="site-mark" src="/assets/braveheart-mark.png" alt="Braveheart" />
       <div className="stack">
         <PixelPainting />
 
@@ -50,16 +48,9 @@ export default function Landing() {
               Get in touch
             </button>
           )}
-          <a className="link link-muted" href="/thesis">
-            Read the thesis
-          </a>
         </nav>
 
         <Roster />
-
-        <footer className="site-footer">
-          <a href="mailto:aryan@braveheartfellowship.org">aryan@braveheartfellowship.org</a>
-        </footer>
       </div>
     </main>
   );
