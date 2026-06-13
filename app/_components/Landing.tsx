@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import PixelPainting from "./PixelPainting";
 import Roster from "./Roster";
 import { useApplyPanel } from "./ApplyPanelContext";
 
 export default function Landing() {
   const { open } = useApplyPanel();
+  const [emailRevealed, setEmailRevealed] = useState(false);
 
   return (
     <main className="shell">
@@ -35,9 +37,15 @@ export default function Landing() {
           <button type="button" className="link" onClick={() => open("fellowship")}>
             Apply for the fellowship
           </button>
-          <button type="button" className="link" onClick={() => open("grant")}>
-            Apply for a grant
-          </button>
+          {emailRevealed ? (
+            <a className="link" href="mailto:aryan@braveheartfellowship.org">
+              aryan@braveheartfellowship.org
+            </a>
+          ) : (
+            <button type="button" className="link" onClick={() => setEmailRevealed(true)}>
+              Get in touch
+            </button>
+          )}
           <a className="link link-muted" href="/thesis">
             Read the thesis
           </a>
