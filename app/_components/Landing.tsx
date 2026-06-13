@@ -24,7 +24,7 @@ export default function Landing() {
         </section>
 
         <section>
-          <p className="block-title">What you get</p>
+          <p className="block-title">What</p>
           <p className="give-text">
             A one-year program with access to the best professor networks, the models, and the
             journals — everything you need to do groundbreaking research from your basement.
