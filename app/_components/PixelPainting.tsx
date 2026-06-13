@@ -3,14 +3,15 @@
 import { useEffect, useRef } from "react";
 
 /**
- * A framed Renaissance painting. It stays crisp; only a small region around
- * the cursor breaks into pixels — the dots shrink and drift a little, and the
- * effect falls off quickly outside a tight radius.
+ * Michelangelo's Awakening Slave — a figure struggling out of raw marble.
+ * It stays crisp; only a small region around the cursor breaks into pixels —
+ * the dots shrink and drift a little, falling off quickly outside a tight
+ * radius.
  */
 
-// Crop the fresco scene out of the source image.
-const CROP = { x: 0.02, y: 0.025, w: 0.96, h: 0.7 };
-const ASPECT = (0.96 * 1920) / (0.7 * 1490); // ≈ 1.77
+// Trim the museum wall and the corner label out of the source photo.
+const CROP = { x: 0.03, y: 0.02, w: 0.92, h: 0.93 };
+const ASPECT = (0.92 * 600) / (0.93 * 881); // ≈ 0.674 (portrait)
 
 export default function PixelPainting() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,7 +44,7 @@ export default function PixelPainting() {
 
     const img = new Image();
     img.decoding = "async";
-    img.src = "/assets/painting.jpg";
+    img.src = "/assets/slave.jpg";
 
     let sx = 0;
     let sy = 0;
@@ -199,9 +200,8 @@ export default function PixelPainting() {
   return (
     <figure className="frame-figure">
       <div className="frame">
-        <canvas ref={canvasRef} aria-label="The School of Athens by Raphael" />
+        <canvas ref={canvasRef} aria-label="The Awakening Slave by Michelangelo" />
       </div>
-      <figcaption className="caption">Raphael, The School of Athens</figcaption>
     </figure>
   );
 }

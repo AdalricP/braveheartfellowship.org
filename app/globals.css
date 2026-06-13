@@ -86,7 +86,7 @@ a {
 }
 
 .frame {
-  width: 100%;
+  width: min(400px, 100%);
   background: none;
   padding: 0;
 }
@@ -96,14 +96,6 @@ a {
   width: 100%;
   height: auto;
   cursor: crosshair;
-}
-
-.caption {
-  margin-top: 12px;
-  font-size: 0.8rem;
-  color: var(--muted);
-  font-style: italic;
-  font-family: var(--font-display);
 }
 
 /* ---------- Lede ---------- */
