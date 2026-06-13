@@ -44,7 +44,7 @@ export default function PixelPainting() {
 
     const img = new Image();
     img.decoding = "async";
-    img.src = "/assets/slave.jpg";
+    img.src = "/assets/awakening-slave.jpg";
 
     let sx = 0;
     let sy = 0;
